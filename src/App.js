@@ -1,8 +1,10 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewAdvice } from './redux/actions/newAdvice';
+
+import bottom from './assets/images/pattern-divider-desktop.svg';
+import button from './assets/images/icon-dice.svg';
 
 function App() {
 
@@ -11,14 +13,19 @@ function App() {
   }, [])
 
   const dispatch = useDispatch();
-  const item = useSelector(({ advice }) => advice);
-  console.log(item);
+  const {id, advice} = useSelector(({ advice }) => advice);
 
   return (
-    <div className="App">
-      <h1>Hello world!</h1>
-      <h1>{item.advice}</h1>
-      <button onClick={() => dispatch(getNewAdvice())}>Add</button>
+    <div className="wrapper">
+      <div className="content">
+        <p className="title">advice #{id}</p>
+        <p className="advice">"{advice}"</p>
+        {/* <img src={bottom} alt="" /> */}
+        <div className='bottom'></div>
+        <button className="button" onClick={() => dispatch(getNewAdvice())}>
+          <img src={button} alt="" className='button_img'/>
+        </button>
+      </div>
     </div>
   );
 }
